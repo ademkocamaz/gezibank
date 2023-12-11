@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GeziBank</string>
+    <string name="string_tum_etkinlikler">Tüm Etkinlikler</string>
+    <string name="string_butce_olustur">Bütçe Oluştur</string>
+    <string name="string_etkinlik_ekle">Etkinlik Ekle</string>
+    <string name="string_herseyi_sil">Herşeyi Sil</string>
+</resources>

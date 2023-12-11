@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+
+        android:id="@+id/main_menu_etkinlik_ekle"
+        android:title="@string/string_etkinlik_ekle" />
+    <item
+        android:id="@+id/main_menu_tum_etkinlikler"
+        android:title="@string/string_tum_etkinlikler" />
+    <item
+        android:id="@+id/main_menu_butce_olustur"
+        android:title="@string/string_butce_olustur" />
+
+    <item
+        android:id="@+id/main_menu_herseyi_sil"
+        android:title="@string/string_herseyi_sil" />
+</menu>
