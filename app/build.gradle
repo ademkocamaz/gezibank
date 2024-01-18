@@ -6,14 +6,14 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 34
 
     defaultConfig {
         applicationId "ademkocamaz.gezibank"
         minSdk 23
-        targetSdk 30
-        versionCode 3
-        versionName "1.2"
+        targetSdk 34
+        versionCode 4
+        versionName '1.3'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -31,6 +31,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'ademkocamaz.gezibank'
 }
 
 dependencies {
@@ -51,5 +52,5 @@ dependencies {
     def preference_version = "1.1.1"
     implementation "androidx.preference:preference-ktx:$preference_version"
 
-    implementation 'com.google.android.gms:play-services-ads:20.2.0'
+//    implementation 'com.google.android.gms:play-services-ads:20.2.0'
 }

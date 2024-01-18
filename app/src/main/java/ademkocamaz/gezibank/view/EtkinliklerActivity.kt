@@ -7,8 +7,6 @@ import ademkocamaz.gezibank.model.Etkinlik
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Database
-import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_etkinlikler.*
 
 class EtkinliklerActivity : AppCompatActivity() {

@@ -11,8 +11,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
+//import com.google.android.gms.ads.AdRequest
+//import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        MobileAds.initialize(this)
+        //MobileAds.initialize(this)
 
-        reklamYenile()
+        //reklamYenile()
 
         butceGetir()
         kalaniBul()
@@ -51,10 +51,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun reklamYenile(){
+    /*fun reklamYenile(){
         var adRequest = AdRequest.Builder().build()
         main_adView.loadAd(adRequest)
-    }
+    }*/
 
     fun verileriGetir() {
         val liste = GeziBankDatabase(applicationContext).dao().getAll()
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         butceGetir()
         kalaniBul()
         verileriGetir()
-        reklamYenile()
+        //reklamYenile()
         super.onResume()
     }
 
