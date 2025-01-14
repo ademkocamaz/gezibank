@@ -14,7 +14,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2665831721454911~6839519449" />
+            android:value="ca-app-pub-5764318432941968~7927871763"/>
 
         <activity
             android:name=".view.ButceOlusturActivity"

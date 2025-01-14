@@ -3,6 +3,7 @@ package ademkocamaz.gezibank.view
 import ademkocamaz.gezibank.R
 import ademkocamaz.gezibank.adapter.RecyclerAdapter
 import ademkocamaz.gezibank.dataaccess.GeziBankDatabase
+import ademkocamaz.gezibank.databinding.ActivityMainBinding
 import ademkocamaz.gezibank.model.Etkinlik
 import ademkocamaz.gezibank.util.OzelSharedPreferences
 import android.content.Intent
@@ -10,24 +11,41 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.Window
+import androidx.activity.enableEdgeToEdge
 import androidx.recyclerview.widget.LinearLayoutManager
-//import com.google.android.gms.ads.AdRequest
-//import com.google.android.gms.ads.MobileAds
-import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private var butce: Double = 0.0
     private lateinit var etkinlikListesi: ArrayList<Etkinlik>
     private lateinit var recyclerAdapter: RecyclerAdapter
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
 
-        //MobileAds.initialize(this)
 
-        //reklamYenile()
+        InterstitialAd.load(
+            this,
+            "ca-app-pub-5764318432941968/3246390729",
+            AdRequest.Builder().build(),
+            object : InterstitialAdLoadCallback() {
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    interstitialAd.show(this@MainActivity)
+                }
+            })
+
+        binding.mainAdView.loadAd(AdRequest.Builder().build())
+
+
+        setContentView(view)
 
         butceGetir()
         kalaniBul()
@@ -45,16 +63,10 @@ class MainActivity : AppCompatActivity() {
         verileriGetir()
 
         val layoutManager = LinearLayoutManager(this)
-        main_recyclerView.layoutManager = layoutManager
-        main_recyclerView.adapter = recyclerAdapter
-
+        binding.mainRecyclerView.layoutManager = layoutManager
+        binding.mainRecyclerView.adapter = recyclerAdapter
 
     }
-
-    /*fun reklamYenile(){
-        var adRequest = AdRequest.Builder().build()
-        main_adView.loadAd(adRequest)
-    }*/
 
     fun verileriGetir() {
         val liste = GeziBankDatabase(applicationContext).dao().getAll()
@@ -72,21 +84,20 @@ class MainActivity : AppCompatActivity() {
         } else {
             butce = 0.0
         }
-        main_textView_butce_bakiye.text = "Bütçe :    " + butce.toString()+"₺"
+        binding.mainTextViewButceBakiye.text = "Bütçe :    " + butce.toString() + "₺"
     }
 
     fun kalaniBul() {
         val total = GeziBankDatabase(applicationContext).dao().total()
         val kalan = butce - total
-        main_textView_butce_kalan.text = "Kalan :    " + kalan.toString()+"₺"
-        main_textView_etkinlik_toplam.text = "Toplam :    " + total.toString()+"₺"
+        binding.mainTextViewButceKalan.text = "Kalan :    " + kalan.toString() + "₺"
+        binding.mainTextViewEtkinlikToplam.text = "Toplam :    " + total.toString() + "₺"
     }
 
     override fun onResume() {
         butceGetir()
         kalaniBul()
         verileriGetir()
-        //reklamYenile()
         super.onResume()
     }
 
@@ -112,7 +123,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        if(item.itemId==R.id.main_menu_herseyi_sil){
+        if (item.itemId == R.id.main_menu_herseyi_sil) {
             GeziBankDatabase(applicationContext).dao().deleteAll()
             OzelSharedPreferences(applicationContext).butceKaydet(0f)
             onResume()
